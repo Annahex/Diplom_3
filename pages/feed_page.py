@@ -10,6 +10,8 @@ class FeedPage(BasePage):
     history_item = (By.XPATH, ".//li[starts-with(@class, 'OrderHistory_listItem')]")
     history_id = (By.XPATH, ".//p[starts-with(@class, 'text text_type_digits-default')]")
     item_info_header = (By.XPATH, ".//p[text()='Cостав']")
+    order_counter = (By.XPATH, ".//p[starts-with(@class, 'OrderFeed_number__')]")
+    not_ready_orders = (By.XPATH, ".//ul[starts-with(@class, 'OrderFeed_orderListReady__')]/li[starts-with(@class, 'text text_type_digits-default')]")
 
     @allure.step('Открытие страницы ленты заказа')
     def click_to_open_feed_page(self):
@@ -40,6 +42,18 @@ class FeedPage(BasePage):
         else:
             assert False
         assert True
+
+    @allure.step('Получение счетчиков заказов')
+    def get_order_counters(self):
+        self.wait_for_visibility(self.order_counter)
+        counters = self.find_all_elements(self.order_counter)
+        return int(counters[0].text), int(counters[1].text)
+
+    @allure.step('Получение счетчиков заказов')
+    def get_not_ready_order_ids(self):
+        self.wait_for_visibility(self.not_ready_orders)
+        elements = self.find_all_elements(self.not_ready_orders)
+        return list(map(lambda e: e.text, elements))
 
 
 
