@@ -33,7 +33,7 @@ class ProfilePage(BasePage):
         return self.find_element_by_index(self.order_id, 0).text
 
     @allure.step('Проверка открытия страницы истории заказов')
-    def check_profile_page_opens(self):
+    def check_order_history_page_opens(self):
         assert self.driver.current_url == ORDER_HISTORY_URL
 
     @allure.step('Выход из ЛК')

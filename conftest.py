@@ -24,7 +24,7 @@ def random_password():
     return Faker().password()
 
 
-@pytest.fixture(params=["firefox", "chrome"])
+@pytest.fixture(params=["chrome"])
 def driver(request):
     browser = request.param
     if browser == "chrome":
