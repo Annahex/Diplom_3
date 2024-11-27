@@ -1,5 +1,6 @@
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.action_chains import ActionChains
 import allure
 from urls.urls import LOGIN_URL, FORGOT_PASSWORD_URL, BASE_URL
 
@@ -21,6 +22,10 @@ class BasePage:
     def find_element(self, locator):
         return self.driver.find_element(*locator)
 
+    @allure.step('Перетаскивание элемента')
+    def drag_and_drop(self, from_element, to_element):
+        ActionChains(self.driver).drag_and_drop(from_element, to_element).perform()
+
     @allure.step('Ожидание кликабельности элемента')
     def wait_to_be_clickable(self, locator):
         WebDriverWait(self.driver, 3).until(
@@ -30,6 +35,11 @@ class BasePage:
     def wait_for_visibility(self, locator):
         WebDriverWait(self.driver, 3).until(
             expected_conditions.visibility_of_element_located(tuple(locator)))
+
+    @allure.step('Ожидание исчезновения элемента')
+    def wait_for_invisibility(self, locator):
+        WebDriverWait(self.driver, 3).until(
+            expected_conditions.invisibility_of_element_located(tuple(locator)))
 
     @allure.step('Ожидание смены URL')
     def wait_for_url_change(self, url):
