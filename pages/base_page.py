@@ -1,13 +1,10 @@
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 import allure
-from urls.urls import LOGIN_URL, FORGOT_PASSWORD_URL, PROFILE_URL
+from urls.urls import LOGIN_URL, FORGOT_PASSWORD_URL, BASE_URL
 
 
 class BasePage:
-    order_header_button = (By.XPATH, "//div[starts-with(@class,'Header_Nav')]/button[text()='Заказать']")
-    main_page_button = (By.XPATH, ".//img[@src='/assets/scooter.svg']/parent::a")
 
     def __init__(self, driver):
         self.driver = driver
@@ -42,16 +39,16 @@ class BasePage:
     @allure.step('Открытие страницы логина')
     def open_login_page(self):
         self.driver.get(LOGIN_URL)
-
-    @allure.step('Ожидание загрузки страницы логина')
-    def wait_for_load_login_page(self):
         self.wait_for_url_change(LOGIN_URL)
 
     @allure.step('Открытие страницы восстановления пароля')
     def open_forgot_password_page(self):
         self.driver.get(FORGOT_PASSWORD_URL)
-
-    @allure.step('Ожидание загрузки страницы восстановления пароля')
-    def wait_for_load_forgot_password_page(self):
         self.wait_for_url_change(FORGOT_PASSWORD_URL)
+
+    @allure.step('Открытие страницы конструктора')
+    def open_main_page(self):
+        self.driver.get(BASE_URL)
+        self.wait_for_url_change(BASE_URL)
+
 
