@@ -18,6 +18,10 @@ class BasePage:
     def find_element_by_index(self, locator, index):
         return self.driver.find_elements(*locator)[index]
 
+    @allure.step('Поиск всех элементов')
+    def find_all_elements(self, locator):
+        return self.driver.find_elements(*locator)
+
     @allure.step('Поиск элемента')
     def find_element(self, locator):
         return self.driver.find_element(*locator)
