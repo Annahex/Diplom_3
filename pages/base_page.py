@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 import allure
-from urls.urls import LOGIN_URL, FORGOT_PASSWORD_URL
+from urls.urls import LOGIN_URL, FORGOT_PASSWORD_URL, PROFILE_URL
 
 
 class BasePage:
