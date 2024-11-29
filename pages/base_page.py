@@ -2,7 +2,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.action_chains import ActionChains
 import allure
-from urls.urls import LOGIN_URL, FORGOT_PASSWORD_URL, BASE_URL
+from urls.urls import LOGIN_URL, FORGOT_PASSWORD_URL, BASE_URL, REGISTER_URL
 
 
 class BasePage:
@@ -64,5 +64,10 @@ class BasePage:
     def open_main_page(self):
         self.driver.get(BASE_URL)
         self.wait_for_url_change(BASE_URL)
+
+    @allure.step('Открытие страницы конструктора')
+    def open_register_page(self):
+        self.driver.get(REGISTER_URL)
+        self.wait_for_url_change(REGISTER_URL)
 
 

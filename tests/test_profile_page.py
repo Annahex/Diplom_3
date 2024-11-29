@@ -1,7 +1,6 @@
-import time
+import allure
 
 from pages.profile_page import ProfilePage
-import allure
 
 
 class TestProfilePage:
@@ -25,4 +24,3 @@ class TestProfilePage:
         profile_page.open_profile_page()
         profile_page.logout()
         profile_page.check_logout()
-
