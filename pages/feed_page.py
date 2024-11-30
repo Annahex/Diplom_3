@@ -15,7 +15,7 @@ class FeedPage(BasePage):
 
     @allure.step('Проверка открытия страницы ленты заказов')
     def check_feed_page_opens(self):
-        assert self.driver.current_url == FEED_URL
+        self.check_driver_url(FEED_URL)
 
     @allure.step('Открытие информации о заказе')
     def click_to_open_order_info(self):
@@ -37,11 +37,29 @@ class FeedPage(BasePage):
             assert False
         assert True
 
-    @allure.step('Получение счетчиков заказов')
-    def get_order_counters(self):
-        self.wait_for_visibility(ORDER_COUNTER)
-        counters = self.find_all_elements(ORDER_COUNTER)
-        return int(counters[0].text), int(counters[1].text)
+    @allure.step('Получение счетчиков заказов за все время')
+    def get_order_total_counter(self):
+        self.wait_for_visibility(ORDER_TOTAL_COUNTER)
+        counters = self.find_all_elements(ORDER_TOTAL_COUNTER)
+        return int(counters[0].text)
+
+    @allure.step('Получение счетчиков заказов за все сегодня')
+    def get_order_today_counter(self):
+        self.wait_for_visibility(ORDER_TODAY_COUNTER)
+        counters = self.find_all_elements(ORDER_TODAY_COUNTER)
+        return int(counters[0].text)
+
+    @allure.step('Ожидание инкремента счетчика за все время')
+    def wait_for_total_counter_increment(self, value):
+        self.wait_for_text_appear(ORDER_TOTAL_COUNTER, value)
+
+    @allure.step('Ожидание инкремента счетчика за все сегодня')
+    def wait_for_today_counter_increment(self, value):
+        self.wait_for_text_appear(ORDER_TODAY_COUNTER, value)
+
+    @allure.step('Ожидание появления id заказа')
+    def wait_for_order_appears(self, order_id):
+        self.wait_for_text_appear(NOT_READY_ORDERS, order_id)
 
     @allure.step('Получение счетчиков заказов')
     def get_not_ready_order_ids(self):

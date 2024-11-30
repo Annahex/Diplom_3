@@ -13,7 +13,7 @@ class LoginPage(BasePage):
         self.wait_to_be_clickable(FORGOT_PASSWORD_PAGE_LINK)
         self.find_element(FORGOT_PASSWORD_PAGE_LINK).click()
         self.wait_for_url_change(FORGOT_PASSWORD_URL)
-        assert self.driver.current_url == FORGOT_PASSWORD_URL
+        self.check_driver_url(FORGOT_PASSWORD_URL)
 
     @allure.step('Логин пользователя')
     def login(self, random_email, random_password):

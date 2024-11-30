@@ -1,6 +1,6 @@
 import allure
 
-from helpers.random_data import email
+from helpers.random_data import get_email
 from locators.forgot_password_page_locators import *
 from pages.base_page import BasePage
 
@@ -10,7 +10,7 @@ class ForgotPasswordPage(BasePage):
     @allure.step('Отправка запроса на восстановление пароля')
     def send_password_restore_request(self):
         self.wait_to_be_clickable(RESTORE_PASSWORD_BUTTON)
-        self.find_element(RESTORE_EMAIL_INPUT).send_keys(email())
+        self.find_element(RESTORE_EMAIL_INPUT).send_keys(get_email())
         self.find_element(RESTORE_PASSWORD_BUTTON).click()
         self.wait_for_visibility(RESTORE_PASSWORD_DIV_INPUT)
 

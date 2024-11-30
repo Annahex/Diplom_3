@@ -15,7 +15,7 @@ class ConstructorPage(BasePage):
 
     @allure.step('Проверка открытия страницы конструктора')
     def check_constructor_page_opens(self):
-        assert self.driver.current_url == BASE_URL
+        self.check_driver_url(BASE_URL)
 
     @allure.step('Открытие попапа ингредиента')
     def click_to_open_ingredient_popup(self):

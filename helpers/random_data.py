@@ -1,9 +1,13 @@
 from faker import Faker
 
+_fake = Faker()
+_email = _fake.email()
+_password = _fake.password()
 
-def email():
-    return Faker("ru_RU").email()
+
+def get_email():
+    return _email
 
 
-def password():
-    return Faker("ru_RU").password()
+def get_password():
+    return _password

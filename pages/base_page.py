@@ -1,7 +1,8 @@
+import allure
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.common.action_chains import ActionChains
-import allure
+
 from urls.urls import LOGIN_URL, FORGOT_PASSWORD_URL, BASE_URL, REGISTER_URL
 
 
@@ -45,6 +46,11 @@ class BasePage:
         WebDriverWait(self.driver, 3).until(
             expected_conditions.invisibility_of_element_located(tuple(locator)))
 
+    @allure.step('Ожидание появления текста в элементе')
+    def wait_for_text_appear(self, locator, text):
+        WebDriverWait(self.driver, 3).until(
+            expected_conditions.text_to_be_present_in_element(tuple(locator), text))
+
     @allure.step('Ожидание смены URL')
     def wait_for_url_change(self, url):
         WebDriverWait(self.driver, 3).until(
@@ -70,4 +76,6 @@ class BasePage:
         self.driver.get(REGISTER_URL)
         self.wait_for_url_change(REGISTER_URL)
 
-
+    @allure.step('Проверка соотвествия URL')
+    def check_driver_url(self, expected_url):
+        assert self.driver.current_url == expected_url

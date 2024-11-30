@@ -15,7 +15,7 @@ class ProfilePage(BasePage):
 
     @allure.step('Проверка открытия страницы профиля')
     def check_profile_page_opens(self):
-        assert self.driver.current_url == PROFILE_URL
+        self.check_driver_url(PROFILE_URL)
 
     @allure.step('Открытие страницы истории заказов')
     def open_order_history_page(self):
@@ -30,7 +30,7 @@ class ProfilePage(BasePage):
 
     @allure.step('Проверка открытия страницы истории заказов')
     def check_order_history_page_opens(self):
-        assert self.driver.current_url == ORDER_HISTORY_URL
+        self.check_driver_url(ORDER_HISTORY_URL)
 
     @allure.step('Выход из ЛК')
     def logout(self):
@@ -40,4 +40,4 @@ class ProfilePage(BasePage):
 
     @allure.step('Проверка выхода из ЛК')
     def check_logout(self):
-        assert self.driver.current_url == LOGIN_URL
+        self.check_driver_url(LOGIN_URL)

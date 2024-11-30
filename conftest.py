@@ -1,20 +1,10 @@
 import pytest
 from selenium import webdriver
 
-from helpers.random_data import email, password
+from helpers.random_data import get_email, get_password
 from pages.login_page import LoginPage
 from pages.register_page import RegisterPage
 from urls.urls import REGISTER_URL
-
-
-@pytest.fixture()
-def random_email():
-    return email()
-
-
-@pytest.fixture()
-def random_password():
-    return password()
 
 
 @pytest.fixture(params=["chrome"])
@@ -31,15 +21,15 @@ def driver(request):
 
 
 @pytest.fixture()
-def driver_registered(driver, random_email, random_password):
+def driver_registered(driver):
     driver.get(REGISTER_URL)
     page = RegisterPage(driver)
-    page.register_user(random_email, random_password)
+    page.register_user(get_email(), get_password())
     return driver
 
 
 @pytest.fixture()
-def driver_logged_in(driver_registered, random_email, random_password):
+def driver_logged_in(driver_registered):
     page = LoginPage(driver_registered)
-    page.login(random_email, random_password)
+    page.login(get_email(), get_password())
     return driver_registered
